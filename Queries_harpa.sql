@@ -1,14 +1,25 @@
 select 1 as Query;
 
--- select ...
+-- The ID and name of all locations, sorted descending by name
+SELECT locationid, location
+FROM locations
+ORDER BY location DESC;
 
 select 3 as Query;
 
--- select ...
+-- The number of people that are female.
+SELECT count(genderid) AS num_of_female
+FROM people p
+WHERE p.genderid = 1;
+
 
 select 5 as Query;
 
--- select ...
+-- The PersonID, name, and case title of culprits that live 
+-- in the same place they committed their crime
+SELECT I.isculprit, I.personid, I.caseid
+FROM involvedin I
+WHERE I.isculprit = TRUE;
 
 select 7 as Query;
 
