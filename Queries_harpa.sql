@@ -38,7 +38,7 @@ VALUES
 INSERT INTO InvolvedIn
 VALUES
 (10001, 1, 1, TRUE);
-ROLLBACK;
+
 
 
 SELECT P.PersonID, P.name, Pr.description AS profession_description, COUNT(I.CaseID) AS numcases
@@ -48,6 +48,7 @@ JOIN InvolvedIN I ON P.PersonID = I.PersonID
 JOIN Cases C ON I.CaseID = C.CaseID
 WHERE Pr.description LIKE '% therapist' AND C.isClosed = FALSE
 GROUP BY P.PersonID, Pr.description;
+ROLLBACK;
 
 select 9 as Query;
 
@@ -56,12 +57,12 @@ select 9 as Query;
 -- "hasbeenculprit" should say "guilty" if they have ever been the
 -- culprit in any of those cases, otherwise it should say "not guilty"
 
-SELECT P.PersonID, P.name 
+SELECT P.PersonID, P.name, CASE WHEN bool_or(I.isCulprit) THEN 'guilty' ELSE 'not_guilty' END AS "hasbeenculprit"
 FROM People P 
 JOIN InvolvedIn I ON P.PersonID = I.PersonID
 JOIN Cases C ON C.CaseID = I.CaseID
 JOIN Locations L ON L.LocationID = C.LocationID
 WHERE L.location LIKE '%vogur'
 GROUP BY P.PersonID
-HAVING COUNT(I.PersonID) >= 2
+HAVING COUNT(I.PersonID) >= 2;
 
