@@ -48,7 +48,7 @@ select 10 as Query;
 -- The last column should be named “yearsSinceLastInvestigation” 
 -- Please note that some people	involved in a crime are not investigated, and that The Bureau is operating in the current year: 2045.
 
-SELECT P.PersonID, P.name, G.gender, AS yearsSinceLastInvestigation
+SELECT P.PersonID, P.name, G.gender, “yearsSinceLastInvestigation”
 FROM Genders G 
 JOIN People P 
     ON G.GenderID = P.GenderID
