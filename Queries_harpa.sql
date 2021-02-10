@@ -28,16 +28,40 @@ select 7 as Query;
 -- For each Person that has a profession that ends with "therapist" and is involved
 -- with an open case, list the ID, name and profession of the person and how many
 -- open cases they are involved in; the last column should be named "numcases"
-SELECT P.PersonID, P.name, Pr.description, COUNT(I.CaseID) AS numcases
-FROM People P
-NATURAL JOIN Professions Pr
-NATURAL JOIN InvolvedIN I
+BEGIN;
+INSERT INTO Professions
+VALUES
+(10002, 'Bla therapist');
+INSERT INTO People 
+VALUES
+(10001, 'Harpa Steingrimsdottir', 10002, 2, 26);
+INSERT INTO InvolvedIn
+VALUES
+(10001, 1, 1, TRUE);
+ROLLBACK;
+
+
+SELECT P.PersonID, P.name, Pr.description AS profession_description, COUNT(I.CaseID) AS numcases
+FROM Professions Pr
+JOIN People P ON P.ProfessionID = Pr.ProfessionID
+JOIN InvolvedIN I ON P.PersonID = I.PersonID
 JOIN Cases C ON I.CaseID = C.CaseID
 WHERE Pr.description LIKE '% therapist' AND C.isClosed = FALSE
-GROUP BY P.PersonID, P.name, Pr.description
+GROUP BY P.PersonID, Pr.description;
 
 select 9 as Query;
 
--- select ...
+-- The ID and name of each person involved in at least two cases
+-- in a town whose name ends in "vogur". Additionally, a row called
+-- "hasbeenculprit" should say "guilty" if they have ever been the
+-- culprit in any of those cases, otherwise it should say "not guilty"
 
+SELECT P.PersonID, P.name 
+FROM People P 
+JOIN InvolvedIn I ON P.PersonID = I.PersonID
+JOIN Cases C ON C.CaseID = I.CaseID
+JOIN Locations L ON L.LocationID = C.LocationID
+WHERE L.location LIKE '%vogur'
+GROUP BY P.PersonID
+HAVING COUNT(I.PersonID) >= 2
 
