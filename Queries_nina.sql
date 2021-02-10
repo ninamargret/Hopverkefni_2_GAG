@@ -39,8 +39,7 @@ JOIN Agents A
     ON P.AgentID = A.AgentID
 JOIN Genders G
     ON G.GenderID = A.GenderID
-WHERE P.Password = '%'+ A.codename+ '%'; -- HJÁLP
-
+WHERE P.Password LIKE concat('%', A.codename, '%');
 
 select 10 as Query;
 -- For people that have	been investigated by exactly 3 different agents, 
