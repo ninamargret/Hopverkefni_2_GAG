@@ -8,22 +8,33 @@ ORDER BY location DESC;
 select 3 as Query;
 
 -- The number of people that are female.
-SELECT count(genderid) AS num_of_female
-FROM people p
-WHERE p.genderid = 1;
+SELECT COUNT(G.gender)
+FROM people P JOIN Genders G ON P.GenderID = G.GenderID
+WHERE G.gender = 'Female';
 
 
 select 5 as Query;
 
 -- The PersonID, name, and case title of culprits that live 
 -- in the same place they committed their crime
-SELECT I.isculprit, I.personid, I.caseid
+SELECT P.PersonID, P.name, C.title
 FROM involvedin I
-WHERE I.isculprit = TRUE;
+JOIN people P ON P.PersonID = I.PersonID
+JOIN cases C ON I.CaseID = C.CaseID
+WHERE I.isculprit = TRUE AND P.LocationID = C.LocationID;
 
 select 7 as Query;
 
--- select ...
+-- For each Person that has a profession that ends with "therapist" and is involved
+-- with an open case, list the ID, name and profession of the person and how many
+-- open cases they are involved in; the last column should be named "numcases"
+SELECT P.PersonID, P.name, Pr.description, COUNT(C.isClosed) AS numcases
+FROM Professions Pr
+JOIN people P ON P.ProfessionID = Pr.ProfessionID
+JOIN involvedIN I ON P.PersonID = I.PersonID
+JOIN cases C ON I.CaseID = C.CaseID
+WHERE Pr.description LIKE '% therapist' AND C.isClosed = FALSE
+GROUP BY P.PersonID
 
 select 9 as Query;
 
