@@ -7,10 +7,13 @@ ORDER BY location ASC, caseCount;
 
 select 4 as Query;
 -- The secret identity name of agents who have investigated people more than ten times
-SELECT A.codename
-FROM Agents A 
-JOIN InvolvedIn I ON A.AgentID = I.AgentID
-GROUP BY A.codename
+SELECT P.name
+FROM People P
+JOIN Agents A
+    ON P.GenderID = A.GenderID
+JOIN InvolvedIn I 
+    ON A.AgentID = I.AgentID
+GROUP BY P.name
 HAVING COUNT(I.PersonID) > 10;
 
 
