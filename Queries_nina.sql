@@ -14,7 +14,7 @@ JOIN People P
 JOIN InvolvedIn I 
     ON A.AgentID = I.AgentID
 GROUP BY A.AgentID, P.PersonID    
-HAVING COUNT(I.PersonID) > 10 and A.secretIdentity = P.PersonID
+HAVING COUNT(I.PersonID) > 10 and A.secretIdentity = P.PersonID;
 
 select 6 as Query;
 -- The ID, name and gender of all people who are involved in a case in Selfoss.
@@ -27,7 +27,8 @@ JOIN InvolvedIn I
     ON I.PersonID = P.PersonID
 JOIN Cases C
     ON I.CaseID = C.CaseID
-JOIN Locations L ON L.LocationID = C.LocationID
+JOIN Locations L 
+    ON L.LocationID = C.LocationID
 WHERE L.location = 'Selfoss';
 
 select 8 as Query;
