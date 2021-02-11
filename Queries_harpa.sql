@@ -17,7 +17,7 @@ select 5 as Query;
 
 -- The PersonID, name, and case title of culprits that live 
 -- in the same place they committed their crime
-SELECT P.PersonID, P.name, C.title
+SELECT P.PersonID, P.name, C.title AS "Case title"
 FROM involvedin I
 JOIN people P ON P.PersonID = I.PersonID
 JOIN cases C ON I.CaseID = C.CaseID
@@ -40,7 +40,6 @@ VALUES
 (10001, 1, 1, TRUE);
 
 
-
 SELECT P.PersonID, P.name, Pr.description AS profession_description, COUNT(I.CaseID) AS numcases
 FROM Professions Pr
 JOIN People P ON P.ProfessionID = Pr.ProfessionID
@@ -57,7 +56,7 @@ select 9 as Query;
 -- "hasbeenculprit" should say "guilty" if they have ever been the
 -- culprit in any of those cases, otherwise it should say "not guilty"
 
-SELECT P.PersonID, P.name, CASE WHEN bool_or(I.isCulprit) THEN 'guilty' ELSE 'not_guilty' END AS "hasbeenculprit"
+SELECT P.PersonID, P.name, CASE WHEN bool_or(I.isCulprit) THEN 'guilty' ELSE 'not guilty' END AS "hasbeenculprit"
 FROM People P 
 JOIN InvolvedIn I ON P.PersonID = I.PersonID
 JOIN Cases C ON C.CaseID = I.CaseID
