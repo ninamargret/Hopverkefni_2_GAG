@@ -283,16 +283,10 @@
      7
 (1 row)
 
-BEGIN
-INSERT 0 1
-INSERT 0 1
-INSERT 0 1
- Person ID |     Name of person     | Profession description | numcases 
------------+------------------------+------------------------+----------
-     10001 | Harpa Steingrimsdottir | Bla therapist          |        1
-(1 row)
+ Person ID | Name of person | Profession description | numcases 
+-----------+----------------+------------------------+----------
+(0 rows)
 
-ROLLBACK
  query 
 -------
      8
