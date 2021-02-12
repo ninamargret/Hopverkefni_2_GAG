@@ -88,22 +88,22 @@ WHERE
 select
     7 as Query;
 
-BEGIN;
+--BEGIN;
 
-INSERT INTO
-    Professions
-VALUES
-    (10002, 'Bla therapist');
+--INSERT INTO
+--    Professions
+--VALUES
+--    (10002, 'Bla therapist');
 
-INSERT INTO
-    People
-VALUES
-    (10001, 'Harpa Steingrimsdottir', 10002, 2, 26);
+--INSERT INTO
+--    People
+--VALUES
+--    (10001, 'Harpa Steingrimsdottir', 10002, 2, 26);
 
-INSERT INTO
-    InvolvedIn
-VALUES
-    (10001, 1, 1, TRUE);
+--INSERT INTO
+--    InvolvedIn
+--VALUES
+--    (10001, 1, 1, TRUE);
 
 SELECT
     P.PersonID AS "Person ID",
@@ -122,7 +122,7 @@ GROUP BY
     P.PersonID,
     Pr.description;
 
-ROLLBACK;
+--ROLLBACK;
 
 
 select
