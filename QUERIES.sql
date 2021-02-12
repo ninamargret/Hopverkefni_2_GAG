@@ -29,7 +29,7 @@ select
 SELECT
     COUNT(G.gender) AS "Amount of females in database"
 FROM
-    people P
+    People P
     NATURAL JOIN Genders G
 WHERE
     G.gender = 'Female';
@@ -61,8 +61,8 @@ SELECT
     C.title AS "Case title"
 FROM
     involvedin I
-    JOIN people P ON P.PersonID = I.PersonID
-    JOIN cases C ON I.CaseID = C.CaseID
+    JOIN People P ON P.PersonID = I.PersonID
+    JOIN Cases C ON I.CaseID = C.CaseID
 WHERE
     I.isculprit = TRUE
     AND P.LocationID = C.LocationID;
