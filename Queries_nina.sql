@@ -56,7 +56,7 @@ JOIN InvolvedIn I
 JOIN Cases C
     ON I.CaseID = C.CaseID
 GROUP BY P.PersonID, G.GenderID
-HAVING COUNT(I.AgentID) = 3;
+HAVING COUNT( DISTINCT I.AgentID) = 3;
 
 
 --HJÁLP hvernig reikna ég
